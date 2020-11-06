@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/main.js"></script>
+    <title>Directives - Vue Js</title>
+</head>
+<body>
+    <div id="app">
+        <template v-if="active">
+            <p>Você está logado!</p>
+            <button v-on:click="active = false">Deslogar</button>
+        </template>
+        <template v-else>
+            <p>Você não está logado!</p>
+            <button v-on:click="active = true">Logar</button>
+        </template>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                active: true
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+</html>

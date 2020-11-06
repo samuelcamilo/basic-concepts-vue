@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/main.js"></script>
+    <title>Directives - Vue Js</title>
+</head>
+<body>
+    <div id="app">
+       <p>Produtos {{chart}}</p>
+       <button v-show="stock" @click="addProduct">+</button>
+       <button v-show="chart" @click="removeProduct">-</button>
+       <p>Estoque {{stock}}</p>
+       <p v-show="stock === 0">Não temos mais produtos em estoque</p>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                chart: 0,
+                stock: 7
+            },
+            methods: {
+                addProduct() {
+                    if(this.stock > 0) {
+                        this.chart++;
+                        this.stock--;
+                    }
+                },
+                removeProduct() {
+                    if(this.chart > 0) {
+                        this.stock++;
+                        this.chart--;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

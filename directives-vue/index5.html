@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/main.js"></script>
+    <title>Directives - Vue Js</title>
+</head>
+<body>
+    <div id="app">
+      <div>
+          <ul>
+              <li v-for="(item, index) in states">
+                  <p>{{item.name}}</p>
+                  <p>{{item.people}}</p>
+              </li>
+          </ul>
+      </div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                states: [
+                    {
+                        people: "45 milhões",
+                        name: "Ceará"
+                    },
+                    {
+                        people: "100 milhões",
+                        name: "Rio de Janeiro"
+                    }
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

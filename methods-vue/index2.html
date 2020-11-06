@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>Symbol: {{company.symbol}}</p>
+        <p>Company Name: {{company.companyName}}</p>
+        <p>Sector: {{company.sector}}</p>
+        <p>Open: {{company.open}}</p>
+        <p>Open Time: {{company.openTime}}</p>
+        <p>Close: {{company.close}}</p>
+        <p>Close Time: {{company.closeTime}}</p>
+        <button @click="requestData">Buscar</button>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                company: { }
+            },
+            methods: {
+                requestData() {
+                    var json = fetch("https://5f9512e82de5f50016ca1cd0.mockapi.io/api/v1/company")
+                                .then(response => response.json())
+                                .then(json => {
+                                    this.company = json;
+                                });
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/vue.js"></script>
+    <title>Computed Property</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="car in getAllCarsBlue">
+                {{car}}
+            </li>
+        </ul>
+        <button @click="removeCar">Remover</button>
+        <p>{{count}}</p>
+        <button @click="count++">Adicionar</button>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                count: 0,
+                cars: [
+                    {
+                        brand: "VW",
+                        color: "Blue"
+                    },
+                    {
+                        brand: "Tesla",
+                        color: "Blue"
+                    },
+                    {
+                        brand: "Ford",
+                        color: "Blue"
+                    }
+                ]
+            },
+            watch: {
+                count() {
+                    console.log(`watch property - ${this.count}`)
+                }
+            },
+            computed: {
+                getAllCarsBlue() {
+                    return this.cars.filter(car => car.color === "Blue")
+                }
+            },
+            methods: {
+                removeCar() {
+                    this.cars.pop();
+                }
+            }
+        })
+    </script>
+</body>
+</html>

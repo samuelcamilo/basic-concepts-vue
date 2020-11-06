@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/main.js"></script>
+    <title>Directives - Vue Js</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li><a @click.prevent="handlerClick" href="https://5f9512e82de5f50016ca1cd0.mockapi.io/api/v1/company/1">West Inc</a></li>
+            <li><a @click.prevent="handlerClick" href="https://5f9512e82de5f50016ca1cd0.mockapi.io/api/v1/company/2">Breitenberg - Feest</a></li>
+            <li><a @click.prevent="handlerClick" href="https://5f9512e82de5f50016ca1cd0.mockapi.io/api/v1/company/3">Bergstrom, Reinger and Jaskolski</a></li>
+            <li><a @click.prevent="handlerClick" href="https://5f9512e82de5f50016ca1cd0.mockapi.io/api/v1/company/4">Johns - Gusikowski</a></li>
+            <li><a @click.prevent="handlerClick" href="https://5f9512e82de5f50016ca1cd0.mockapi.io/api/v1/company/5">Stracke and Sons</a></li>
+        </ul>
+        <div>
+            <p>{{company.companyName}}</p>
+            <p>{{company.sector}}</p>
+            <p>{{company.open}}</p>
+            <p>{{company.openTime}}</p>
+            <p>{{company.close}}</p>
+            <p>{{company.closeTime}}</p>
+            <p>{{company.marketCap}}</p>
+        </div>
+    </div>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                company: { }
+            },
+            methods: {
+                handlerClick(event) {
+                    this.fetchData(event.target.href)
+                },
+                fetchData(url) {
+                    var json = fetch(url)
+                                .then(response => response.json())
+                                .then(json => {
+                                    this.company = json
+                                })
+                }
+            }
+        })
+    </script>
+</body>
+</html>

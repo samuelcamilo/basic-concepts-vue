@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/vue.js"></script>
+    <title>Exercises - Computed & Watch</title>
+</head>
+<body>
+    <div id="app">
+        <label for="">First Name: </label>
+        <input type="text" v-model="user.firstName">
+        <label for="">Last Name: </label>
+        <input type="text" v-model="user.lastName">
+        <p>Full Name: {{createFullName}}</p>
+
+        <select name="countries" id="countries" v-model="selectedItem">
+            <option v-for="countrie in countries" :value="countrie">
+                {{countrie.name}}
+            </option>
+        </select>
+        <button @click="getAllCountries">Buscar Paises</button> 
+        <p>Selected Item: {{capital}}</p>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                user: {
+                    firstName: "",
+                    lastName: ""
+                },
+                selectedItem: "",
+                capital: "",
+                countries: { }
+            },
+            watch: {
+                selectedItem() {
+                    this.capital = this.selectedItem.capital 
+                }
+            },
+            computed: {
+                createFullName() {
+                    return `${this.user.firstName} ${this.user.lastName}`
+                },
+            },
+            methods: {
+                getAllCountries() {
+                    fetch('http://www.restcountries.eu/rest/v2/all')
+                        .then(response => response.json())
+                        .then(r => {
+                            this.countries = r
+                        })
+                }
+            }
+        })
+    </script>
+</body>
+</html>

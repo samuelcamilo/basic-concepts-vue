@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/vue.js"></script>
+    <title>Reactivity - Vue Js</title>
+</head>
+<body>
+    <div id="app">
+        <p>Bermudas - R$<span>{{price}}</span></p>
+        <span>{{total}}</span>
+        <br>
+        <button @click="total++">Adicionar</button>
+        <button @click="total--">Remover</button>
+
+        <p>Total: <span>{{price * total}}</span></p>
+    </div>
+
+    <p>Camisas - R$<span class="price"></span></p>
+    <span class="total"></span>
+    <br>
+    <button class="add">Adicionar</button>
+    <button class="remove">Remover</button>
+
+    <p>Total: <span class="priceTotal"></span></p>
+
+    <script>
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                price: 69,
+                total: 0
+            }
+        })
+
+        const data = {
+            price: 49,
+            total: 0
+        }
+
+        const price = document.querySelector('.price');
+        const total = document.querySelector('.total');
+        var totalPrice = document.querySelector('.priceTotal');
+
+        const btnAdd = document.querySelector('.add');
+        const btnRemove = document.querySelector('.remove');
+
+        price.innerText = data.price;
+        total.innerText = data.total;
+        totalPrice.innerText = (data.price * data.total);
+
+        function increment() {
+            data.total++;
+            refreshUI();
+        }
+
+        function decrement() {
+            data.total--;
+            refreshUI();
+        }
+
+        function refreshUI() {
+            total.innerText = data.total;
+            totalPrice.innerText = (data.price * data.total);
+        }
+
+        btnAdd.addEventListener("click", increment)
+    </script>
+</body>
+</html>

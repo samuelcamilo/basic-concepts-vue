@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{total}}</p>
+        <button @click="increment">Incrementar</button>
+        <button @click="decrement">Decrementar</button>
+
+        <p>{{instrument}}</p>
+        <button @click="changeInstrument('Bass')">Mudar Instrumento</button>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                instrument: "",
+                total: 0
+            },
+            methods: {
+                increment() {
+                    this.total++;
+                    this.logMethod();
+                },
+                decrement() {
+                    this.total--;
+                    this.logMethod();
+                },
+                changeInstrument(instrument) {
+                    this.instrument = instrument;
+                    this.logMethod();
+                },
+                logMethod() {
+                    console.log("method activate!");
+                }
+            }
+        });
+    </script>
+</body>
+</html>

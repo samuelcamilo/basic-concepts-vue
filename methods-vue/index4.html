@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/vue.js"></script>
+    <title>Watch Property</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" placeholder="cep" maxlength="8" v-model="cep">
+        <p>{{cep}}</p>
+        <ul>
+            <li v-for="(value, key) in address">
+                {{key}}: {{value}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                cep: "",
+                address: { }
+            },
+            watch: {
+                cep(value) {
+                    if(value.length === 8) {
+                        fetch(`https://viacep.com.br/ws/${value}/json`)
+                        .then(response => response.json())
+                        .then(json => {
+                            this.address = json
+                        })
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

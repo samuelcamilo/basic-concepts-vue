@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/main.js"></script>
+    <title>Directives - Vue Js</title>
+</head>
+<body>
+    <style>
+        .green {
+            color: green;
+        }
+
+        .red {
+            color: red;
+        }
+    </style>
+    <div id="app">
+        <p>{{google.companyName}}</p>
+        <p :class="google.marketCap > apple.marketCap ? 'green' : 'red'">{{google.marketCap}}</p>
+        <p>{{apple.companyName}}</p>
+        <p :class="google.marketCap < apple.marketCap ? 'green' : 'red'">{{apple.marketCap}}</p>
+        <input type="text" @keyup="handlerClick">
+        <button @click.prevent.once="handlerClick">Buscar Dados</button>
+    </div>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                test: true,
+                google: { },
+                apple: { }
+            },
+            methods: {
+                getHttpRequestGoogle() {
+                    var json = fetch("https://5f9512e82de5f50016ca1cd0.mockapi.io/api/v1/company/1")
+                                .then(response => response.json())
+                                .then(json => {
+                                    this.google = json;
+                                });
+                },
+                getHttpRequestApple() {
+                    var json = fetch("https://5f9512e82de5f50016ca1cd0.mockapi.io/api/v1/company/2")
+                                .then(response => response.json())
+                                .then(json => {
+                                    this.apple = json;
+                                });
+                },
+                handlerClick(event) {
+                    // this.getHttpRequestGoogle();
+                    // this.getHttpRequestApple();
+                    console.log(event.key);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
