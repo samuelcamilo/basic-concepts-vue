@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/main.js"></script>
+    <title>Directivies Vue.js</title>
+</head>
+<body>
+    <div id="app">
+        <ul v-bind:class="{column: activate}">
+            <li>Produtos</li>
+            <li>Serviços</li>
+            <li>Contato</li>
+            <li>Sobre</li>
+        </ul>
+        <button v-on:click="activate = !activate">Change Now!</button>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                activate: false
+            }
+        })  
+    </script>
+    <style>
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            font-family: monospace;
+            padding: 0px;
+            margin: 0px;
+            list-style: none;
+        }
+
+        .column {
+            flex-direction: column;
+        }
+
+        li {
+            padding: 20px;
+            margin: 10px;
+            color: white;
+            font-weight: bold;
+            background: #84e;
+            border-radius: 8px;
+            flex: 1;
+            text-align: center;
+        }
+    </style>
+</body>
+</html>

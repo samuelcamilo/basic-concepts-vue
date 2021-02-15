@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/main.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                totalKeyPress: 0
+            },
+            methods: {
+                handlerKeyPress(event) {
+                    console.log(event)
+                    this.totalKeyPress++;
+                    console.log(this.totalKeyPress)
+                }
+            },
+            created() {
+                window.addEventListener("keypress", this.handlerKeyPress)
+                console.log("ativou")
+            }
+        })
+    </script>
+</body>
+</html>

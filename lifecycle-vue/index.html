@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/vue.js"></script>
+  <title>Lifecycle Vue</title>
+</head>
+<body>
+  <div id="app">
+    <p>{{ message }}</p>
+    <div>{{ github }}</div>
+    <button @click="getUserGitHub">Consultar Usuário Git</button>
+    <button @click="getUserGitHub">Destroy</button>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        github: { },
+        message: 'Consulta GitHub'
+      },
+      methods: {
+        getUserGitHub() {
+          fetch('https://api.github.com/users/samuelcamilo')
+            .then(response => response.json())
+            .then(response => {
+              this.github = response
+            })
+        }
+      },
+      beforeCreate() {
+        console.log('beforeCreate(el): ' + this.$el) // Com o beforeCreate DOM ainda não foi criado. Isso pq o componente se quer foi criado.
+        console.log('beforeCreate(message): ' + this.message) // Como também para as propriedades presentes.
+      },
+      created() {
+        console.log('created(el): ' + this.$el) // Mesmo com o componente criado, não conseguimos ver o DOM. 
+        console.log('created(message): ' + this.message) // Como componente já criado, as propriedades passam a ser visíveis.
+        // this.getUserGitHub()
+      },
+      beforeMount() {
+        console.log(this.$el) // Com o beforeMount temos o acesso ao DOM.
+        console.log('beforeMount(message): ' + this.message) // Como também já temos acesso as valores contidos em data.
+      },
+      mounted() { // Com o mounted eu cosigo ter o DOM com os valores reativos aplicados no HTML.
+        console.log(this.$el)
+        console.log('beforeMount(message): ' + this.message) 
+      },
+      beforeUpdate() { // O beforeUpdate é disparado a cada vez que um elemento reativo é alterado. Nesse caso o DOM ainda não foi atualizado.
+        console.log(this.github)
+      },
+      updated() { // updated ocorre quando um elemento reativo é alterado. Nesse caso o DOM já foi atualizado.
+        console.log(this.github)
+      },
+      beforeDestroy() {
+        console.log('Vai destruir')
+      },
+      destroyed() {
+        console.log('Destruiu')
+      },
+    })
+  </script>
+</body>
+</html>

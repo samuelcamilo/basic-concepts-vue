@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="js/vue.js"></script>
+	<title>Exercise - Lifecycle Vue</title>
+</head>
+<body>
+	<div id="app">
+		<p>Contador: {{ count }}</p>
+		<button @click="addValue()">ADD</button>
+		<ul>
+			<li v-for="(valor, chave) in user">{{ chave }} : {{ valor }}</li>
+		</ul>
+	</div>
+	<script>
+		const vm = new Vue({
+			el: '#app',
+			data: {
+				count: 0,
+				user: { 
+					name: '',
+					bio: '',
+					company: '',
+					location: ''
+				}
+			},
+			methods: {
+				addValue() {
+					this.count = this.count + 1
+				},
+				getUserGit() {
+					fetch('https://api.github.com/users/samuelcamilo')
+						.then(response => response.json())
+						.then(response => {
+							this.user.name = response.name
+							this.user.bio = response.bio	
+							this.user.company = response.company
+							this.user.location = response.location
+						})
+				}
+			},
+			created() {
+				this.getUserGit()
+				console.log(this.user)
+			},
+			updated() {
+				document.title = this.count
+			},
+		})
+	</script>
+</body>
+</html>
